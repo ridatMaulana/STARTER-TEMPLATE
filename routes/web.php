@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,11 +27,13 @@ Auth::routes();
 //     return view('home');
 // })->name('home')
 
-Route::get('admin/home', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')
+Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')
     ->middleware('is_admin');
 
-Route::get('admin/buku', [App\Http\Controllers\AdminController::class, 'book'])->name('admin.book')->middleware('is_admin');
+Route::get('admin/buku', [AdminController::class, 'book'])->name('admin.book')->middleware('is_admin');
+Route::get('/ajax/databuku/{id}', [AdminController::class, 'searchBook'])->middleware('is_admin');
 
-Route::post('admin/buku', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.book.submit')->middleware('is_admin');
-Route::patch('admin/buku/update', [App\Http\Controllers\AdminController::class, 'update'])->name('book.update')->middleware('is_admin');
+Route::post('admin/buku', [AdminController::class, 'create'])->name('admin.book.submit')->middleware('is_admin');
+Route::patch('admin/buku/update', [AdminController::class, 'update'])->name('book.update')->middleware('is_admin');
 
+Route::post('buku/hapus/{id}',[AdminController::class, 'destroy'])->name('book.delete')->middleware('is_admin');
