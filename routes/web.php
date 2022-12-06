@@ -29,3 +29,9 @@ Auth::routes();
 
 Route::get('admin/home', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')
     ->middleware('is_admin');
+
+Route::get('admin/buku', [App\Http\Controllers\AdminController::class, 'book'])->name('admin.book')->middleware('is_admin');
+
+Route::post('admin/buku', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.book.submit')->middleware('is_admin');
+Route::patch('admin/buku/update', [App\Http\Controllers\AdminController::class, 'update'])->name('book.update')->middleware('is_admin');
+
