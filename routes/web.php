@@ -37,3 +37,5 @@ Route::post('admin/buku', [AdminController::class, 'create'])->name('admin.book.
 Route::patch('admin/buku/update', [AdminController::class, 'update'])->name('book.update')->middleware('is_admin');
 
 Route::post('buku/hapus/{id}',[AdminController::class, 'destroy'])->name('book.delete')->middleware('is_admin');
+
+Route::get('admin/print_books',[AdminController::class,'print_books'])->name('books.print')->middleware('is_admin');

@@ -14,6 +14,7 @@
             </div>
             <div class="card-body">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data</button>
+                <a href="{{ route('books.print') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
                 <hr>
                 <table id="table-data" class="table table-bordered">
                     <thead>
@@ -46,7 +47,7 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" id="btn-edit" class="btn btn-warning" title="Edit" data-toggle="modal" data-target="#edit" data-id="1"><i class="fas fa-edit"></i></button>
+                                    <button type="button" id="btn-edit" class="btn btn-warning" title="Edit" data-toggle="modal" data-target="#edit" data-id="{{ $book->id }}"><i class="fas fa-edit"></i></button>
                                     <button type="button" class="btn btn-danger" title="Hapus" onclick="deleteConfirm('{{ $book->id }}', '{{ $book->judul }}')"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </td>
@@ -168,7 +169,7 @@
                     $('#edit-penulis').val(res.penulis);
                     $('#edit-tahun').val(res.tahun);
                     $('#edit-id').val(res.id);
-                    $('#edit-old-cover').val(res.old-cover);
+                    $('#edit-old-cover').val(res.cover);
 
                     if(res.cover !== null){
                         $('#image-area').append(

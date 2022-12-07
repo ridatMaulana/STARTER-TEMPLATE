@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,7 +89,7 @@ class AdminController extends Controller
             $filename = 'cover_buku_'.time().'.'.$extension;
             $request->file('cover')->storeAs('public/cover/',$filename);
 
-            Storage::delete('public/cover/',$request->get('old_cover'));
+            Storage::delete('public/cover/'.$request->get('old-cover'));
             $book->cover = $filename;
         }
 
@@ -105,12 +106,21 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $buku = Book::findOrFail($id);
-        Storage::delete('public/cover/',$buku->cover);
+        Storage::delete('public/cover/'.$buku->cover);
         $buku->delete();
 
         return response()->json([
             'success' => true,
             'message' => "Data berhasil dihapus",
         ]);
+    }
+
+    public function print_books()
+    {
+        $book = Book::all();
+
+        $pdf = PDF::loadview('print_books',['books'=>$book]);
+
+        return $pdf->download('data_buku.pdf');
     }
 }
