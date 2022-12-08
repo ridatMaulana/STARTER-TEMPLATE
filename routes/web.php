@@ -39,3 +39,7 @@ Route::patch('admin/buku/update', [AdminController::class, 'update'])->name('boo
 Route::post('buku/hapus/{id}',[AdminController::class, 'destroy'])->name('book.delete')->middleware('is_admin');
 
 Route::get('admin/print_books',[AdminController::class,'print_books'])->name('books.print')->middleware('is_admin');
+
+Route::get('admin/export_excel',[AdminController::class,'export'])->name('books.excel.export')->middleware('is_admin');
+
+Route::post('admin/import_excel',[AdminController::class,'import'])->name('books.excel.import')->middleware('is_admin');

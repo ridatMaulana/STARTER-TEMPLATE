@@ -15,6 +15,10 @@
             <div class="card-body">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data</button>
                 <a href="{{ route('books.print') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> Cetak PDF</a>
+                <div class="btn-group" role="group" aria-label="Basic Example">
+                    <a href="{{ route('books.excel.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
+                    <button type="button" data-toggle="modal" data-target="#import" class="btn btn-warning" target="_blank"><i class="fas fa-file-import"></i> Import</button>
+                </div>
                 <hr>
                 <table id="table-data" class="table table-bordered">
                     <thead>
@@ -33,6 +37,7 @@
                          $no = 1;
                         @endphp
                         @foreach ($books as $book)
+                        <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $book->judul }}</td>
                             <td>{{ $book->penulis }}</td>
@@ -51,9 +56,36 @@
                                     <button type="button" class="btn btn-danger" title="Hapus" onclick="deleteConfirm('{{ $book->id }}', '{{ $book->judul }}')"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data Buku</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('books.excel.import') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="file">Upload File</label>
+                            <input type="file" name="file" id="file" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Batal</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Import Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
