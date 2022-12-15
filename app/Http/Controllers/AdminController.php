@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         $books = Book::index();
         $user = Auth::user();
-        return view('book',compact('user', 'books'));
+        return view('admin/book',compact('user', 'books'));
     }
 
     public function create(Request $request)
@@ -38,6 +38,7 @@ class AdminController extends Controller
             'penulis' => 'required',
             'tahun' => 'required',
             'penerbit' => 'required',
+            'cover' => 'mimes:jpg,png,jpeg,gif,svg'
         ]);
         $book = new Book;
 
@@ -80,6 +81,7 @@ class AdminController extends Controller
             'penulis' => 'required',
             'tahun' => 'required',
             'penerbit' => 'required',
+            'cover' => 'mimes:jpg,png,jpeg,gif,svg'
         ]);
 
         $book->judul = $request->get('judul');

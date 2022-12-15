@@ -323,6 +323,13 @@ return [
             'text' => 'Buku',
             'url'  => 'admin/buku',
             'icon' => 'fas fa-fw fa-book',
+            'can' => 'isAdmin'
+        ],
+        [
+            'text' => 'Data Buku',
+            'url'  => 'buku',
+            'icon' => 'fas fa-fw fa-book',
+            'can' => 'isUser'
         ],
         [
             'text' => 'profile',

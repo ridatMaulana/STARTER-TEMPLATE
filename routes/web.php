@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,7 @@ Auth::routes();
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')
     ->middleware('is_admin');
 
+Route::get('buku', [BookController::class, 'index'])->name('book');
 Route::get('admin/buku', [AdminController::class, 'book'])->name('admin.book')->middleware('is_admin');
 Route::get('/ajax/databuku/{id}', [AdminController::class, 'searchBook'])->middleware('is_admin');
 

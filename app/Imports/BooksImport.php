@@ -15,11 +15,20 @@ class BooksImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        if ($row->hasFile('cover')) {
+            $extension = $row->file('cover')->extension();
+            $filename = 'cover_buku_'.time().'.'.$extension;
+            $row->file('cover')->storeAs('public/cover/',$filename);
+
+            Storage::delete('public/cover/'.$request->get('old-cover'));
+            $book->cover = $filename;
+        }
         return new Book([
             'judul' => $row['judul'],
             'penulis' => $row['penulis'],
             'tahun' => $row['tahun'],
             'penerbit' => $row['penerbit'],
+            'cover' => $filename
         ]);
     }
 }

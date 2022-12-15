@@ -58,7 +58,7 @@ class BookController extends Controller
             'penulis' => 'required',
             'tahun' => 'required',
             'penerbit' => 'required',
-            'image' => 'image|file|max:2048'
+            'cover' => 'image|file'
         ]);
 
         if ($request->hasFile('cover')) {
@@ -72,6 +72,7 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         Storage::delete('public/cover/'.$book->cover);
 
+        $book->update($validate);
         return response()->json([
             'message' => "Data berhasil diubah",
             'books' => $validate,
