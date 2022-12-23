@@ -20,7 +20,7 @@
             @if ($no % 3 == 0 || $no == 0)
             <div class="row">
             @endif
-            <div class="card card-primary col-md-3 mx-auto">
+            <div class="card card-primary col-md-3 mr-auto">
                 <div class="card-header">
                   <h2 class="card-title">{{ $item->judul }}</h2>
 
