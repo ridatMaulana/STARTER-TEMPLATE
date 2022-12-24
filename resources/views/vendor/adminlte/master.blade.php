@@ -169,13 +169,6 @@
                 @endforeach
             @endif
 
-            @if($errors->any())
-                    Swal.fire({
-                        icon: 'error',
-                        title: "Ooops",
-                        text: "Terjadi suatu kesalahan",
-                    })
-            @endif
             $('#table-data').DataTable();
 
             let baseUrl = "<?= url('/') ?>";
