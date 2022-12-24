@@ -6,7 +6,7 @@ class Example extends Component{
         super(props);
         if(user!=null)
         this.state = {
-          text: "Wellcome "+user+"!!!"
+          text: "Welcome "+user+"!!!"
         };
         else
         this.state = {
