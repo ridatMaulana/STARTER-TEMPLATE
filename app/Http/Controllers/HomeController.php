@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 
 class HomeController extends Controller
 {
@@ -31,13 +32,17 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $user = Auth::user();
-        return view('admin/profil',compact('user'));
+        $data['user'] = Auth::user();
+        $role = Role::where('id', $data['user']->roles_id)->get();
+        foreach ($role as $roles)
+        {
+            $data['role'] = $roles;
+        }
+        return view('admin/profil')->with($data);
     }
 
     public function change_password()
     {
-        $user = Auth::user();
         return view('admin/password');
     }
 
